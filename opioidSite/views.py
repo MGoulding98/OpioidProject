@@ -104,11 +104,11 @@ def showPrescriptionPageView(request) :
     tenQuery = 'select t.id, p.npi, lname, fname, t.drugname, t.qty from pd_prescriber p inner join pd_triple t on t.prescriberid = p.npi where'
 
     if drugName != '' :
-        sQuery += " drugname = '" + drugName + "'"
-        tenQuery += " drugname ='" + drugName + "'"
+        sQuery += " drugname = '" + drugName.upper() + "'"
+        tenQuery += " drugname ='" + drugName.upper() + "'"
         
     if isOpioid != '' :
-        sQuery += " AND isopioid = '" + isOpioid + "'"  
+        sQuery += " AND isopioid = '" + isOpioid.upper() + "'"  
         
 
     tenQuery +='order by 6 desc limit 10'
