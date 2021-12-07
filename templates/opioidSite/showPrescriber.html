@@ -44,30 +44,33 @@
             <b>Credentials</b>: {{ prescriber.credential }}
             <br><br>
           </p>  
-          <u>Details on Drugs Prescribed by Prescriber:</u><br><br>
-          <table>
-            <tr>
-                <th style="padding:0 20px 0 0">Drug Name</th>
-                
-                <th style="padding:0 20px 0 0">Quantity Prescribed</th>
+          {% for prescriber in Prescriber %}
+            <u>Details on Drugs Prescribed by Prescriber:</u><br><br>
+            <table>
+              <tr>
+                  <th style="padding:0 20px 0 0">Drug Name</th>
+                  
+                  <th style="padding:0 20px 0 0">Quantity Prescribed</th>
 
-                <th>Average Prescribed</th>
-            </tr>
-            {% for entry in DrugQuantity %}
-            <tr> 
-                <td style="padding:0 20px 0 0">{{ entry.drugname }}</td>
-                
-                <td style="padding:0 20px 0 0">{{ entry.qty }}</td>
+                  <th>Average Prescribed</th>
+              </tr>
+              {% for entry in DrugQuantity %}
+              <tr> 
+                  <td style="padding:0 20px 0 0">{{ entry.drugname }}</td>
+                  
+                  <td style="padding:0 20px 0 0">{{ entry.qty }}</td>
 
-                {% for avg in AvgDrug %}
-                  {% if avg.drugname == entry.drugname %}
-                  <td>{{ avg.avp }}</td>
-                  {% endif %}
-                {% endfor %} 
+                  {% for avg in AvgDrug %}
+                    {% if avg.drugname == entry.drugname %}
+                    <td>{{ avg.avp }}</td>
+                    {% endif %}
+                  {% endfor %} 
 
-            </tr>
-            {% endfor %}
-          </table>
+              </tr>
+              {% endfor %}
+            </table>
+          {% empty %}
+          {% endfor %}
         {% empty %}
           <p class="container
           px-4 px-lg-5
