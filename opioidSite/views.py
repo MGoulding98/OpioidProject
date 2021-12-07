@@ -23,14 +23,14 @@ def showPrescriberPageView(request) :
     
 
     if fName != '' :
-        prescriberQuery += " fname = '" + fName + "'"
-        drugQuery += " fname = '" + fName + "'"
-        avgQuery += " fname = '" + fName + "'"
+        prescriberQuery += " fname = '" + fName.capitalize() + "'"
+        drugQuery += " fname = '" + fName.capitalize() + "'"
+        avgQuery += " fname = '" + fName.capitalize() + "'"
         
     if lName != '' :
-        prescriberQuery += " AND lname = '" + lName + "'"
-        drugQuery += " AND lname = '" + lName + "'"
-        avgQuery += " AND lname = '" + lName + "'"
+        prescriberQuery += " AND lname = '" + lName.capitalize() + "'"
+        drugQuery += " AND lname = '" + lName.capitalize() + "'"
+        avgQuery += " AND lname = '" + lName.capitalize() + "'"
 
     if gender != '' :
         prescriberQuery += " AND gender = '" + gender + "'"
