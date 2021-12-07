@@ -1,0 +1,92 @@
+<!-- Shows specific Prescriber details from either the search page or the view details button on the view all page -->
+
+{% extends 'base.html' %} {% load static %} {% block content %}
+<header class="masthead" style="height:1100px" >
+  <div
+    class="
+      container
+      px-4 px-lg-5
+      d-flex
+      h-100
+      justify-content-center
+    "
+  >
+
+  <div>
+    <div class="d-flex justify-content-center">
+      <div
+        class="text-center, text-white-50"
+        style="font-size: 30px; text-align: center"
+      >
+        {% for prescriber in Prescriber %}     
+          <p>
+            <b 
+            class="
+              justify-content-center
+              text-white-50
+            "
+            style="
+              Font-size:45px
+            "
+          >Prescriber</b>
+            <br /><br />
+            <b>First Name</b>: {{ prescriber.fname }}
+            <br />
+            <b>Last Name</b>: {{ prescriber.lname }}
+            <br />
+            {% if prescriber.gender == 'M' %}
+            <b>Gender</b>: Male {% else %} <b>Gender</b>: Female {% endif %}
+            <br />
+            <b>State</b>: {{ prescriber.state }}
+            <br />
+            <b>Specialty</b>: {{ prescriber.specialty }}
+            <br />
+            <b>Credentials</b>: {{ prescriber.credential }}
+            <br><br>
+          </p>  
+          <u>Details on Drugs Prescribed by Prescriber:</u><br><br>
+          <table>
+            <tr>
+                <th style="padding:0 20px 0 0">Drug Name</th>
+                
+                <th style="padding:0 20px 0 0">Quantity Prescribed</th>
+
+                <th>Average Prescribed</th>
+            </tr>
+            {% for entry in DrugQuantity %}
+            <tr> 
+                <td style="padding:0 20px 0 0">{{ entry.drugname }}</td>
+                
+                <td style="padding:0 20px 0 0">{{ entry.qty }}</td>
+
+                {% for avg in AvgDrug %}
+                  {% if avg.drugname == entry.drugname %}
+                  <td>{{ avg.avp }}</td>
+                  {% endif %}
+                {% endfor %} 
+
+            </tr>
+            {% endfor %}
+          </table>
+        {% empty %}
+          <p class="container
+          px-4 px-lg-5
+          d-flex
+          h-100 
+          align-items-center
+          justify-content-center"
+          style="padding-top:50px">No results.<br />Please try again or add a new prescriber.</p>
+        {% endfor %} 
+<br><br>
+      </div>
+    </div>
+    {% for prescriber in Prescriber %}
+      <div style="text-align: center">
+        <a class="btn btn-primary" href="{% url 'editPrescriber' pre_num=prescriber.npi %}">Edit Prescriber</a>
+        <a class="btn btn-primary" href="{% url 'deletePrescriber' pre_num=prescriber.npi %}">Delete Prescriber</a>
+      </div>   
+    {% endfor %}
+  </div>
+</div>
+</header>
+{% endblock %}

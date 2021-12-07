@@ -1,0 +1,87 @@
+<!-- Create table to dynamically display prescriber information and buttons -->
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<header class="masthead" style="height:1100px">
+    <div
+      class="
+        container
+        px-4 px-lg-5
+        d-flex
+        h-100
+        justify-content-center
+      "
+      style="padding-top:100px"
+    >
+
+      <div class="d-flex justify-content-center">
+        <div class="text-center, text-white-50" style="font-size: 40px; text-align: center">
+            <table style="font-size:20px">
+                <b 
+                class="
+                  justify-content-center
+                  text-white-50
+                "
+                style="
+                  Font-size:45px
+                "
+              >Browse Prescriptions</b>
+                <tr>
+                    <th style="padding:0 20px 0 0; text-decoration:underline">First Name</th>
+                    
+                    <th style="padding:0 20px 0 0; text-decoration:underline">Last Name </th>
+        
+                    <th style="padding:0 20px 0 0; text-decoration:underline">Gender </th>
+        
+                    <th style="padding:0 20px 0 0; text-decoration:underline">Location </th>
+        
+                    <th style="padding:0 20px 0 0; text-decoration:underline">Credential </th>
+        
+                    <th style="padding:0 20px 0 0; text-decoration:underline">Specialty </th>
+        
+                </tr>
+                {% for prescriber in post_list %}
+                  <tr> 
+                    <td style="padding:0 20px 0 0">{{ prescriber.fname }}</td>
+                    
+                    <td style="padding:0 20px 0 0">{{ prescriber.lname }}</td>
+        
+                    <td style="padding:0 20px 0 0">{{ prescriber.gender }}</td>
+        
+                    <td style="padding:0 20px 0 0">{{ prescriber.state }}</td>
+        
+                    <td style="padding:0 20px 0 0">{{ prescriber.credential }}</td>
+        
+                    <td style="padding:0 20px 0 0">{{ prescriber.specialty }}</td>
+        
+                    <td>
+                        <a class="btn btn-primary"  style="width:175px;height:50px;font-size:10px;text-align:center" href="{% url 'showPrescriberDetails' pre_num=prescriber.npi %}">View Details</a>
+                    </td>
+        
+                    <td>
+                        <a class="btn btn-primary" style="width:215px;height:50px;font-size:10px;text-align:center" href="{% url 'deletePrescriber' pre_num=prescriber.npi %}">Delete Prescriber</a>
+                    </td>
+                </tr>
+                {% endfor %}
+      </table>
+        <br>
+      <!-- Adds -->
+        {% if post_list.has_other_pages %}
+            <nav aria-label="Page navigation conatiner"></nav>
+            <ul class="pagination justify-content-center">
+                {% if post_list.has_previous %}
+                <li style="padding-right:100px"><a href="?page={{ post_list.previous_page_number }}" class="btn btn-primary"  style="width:175px;height:60px;font-size:15px;text-align:center"">&laquo; PREV </a></li>
+                {% endif %}
+                {% if post_list.has_next %}
+                <li><a href="?page={{ post_list.next_page_number }}" class="btn btn-primary"  style="width:175px;height:60px;font-size:15px;text-align:center"> NEXT &raquo;</a></li>
+            {% endif %}
+            </ul>
+            </nav>
+            </div>
+            {% endif %}
+        </div>
+      </div>
+    </div>
+  </header>
+{% endblock %}

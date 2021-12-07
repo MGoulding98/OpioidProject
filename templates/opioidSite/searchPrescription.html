@@ -1,0 +1,78 @@
+<!-- Takes input to search for a spcific prescription, displays on show precription page -->
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- Masthead-->
+<header class="masthead" style="height:650px">
+    <div
+      class="
+        container
+        px-4 px-lg-5
+        d-flex
+        h-100
+        align-items-center
+        justify-content-center
+      "
+    >
+      <div class="d-flex justify-content-center">
+  
+        <form name="form" method="get" action="{% url 'showPrescription' %}">
+          {% csrf_token %}
+          <b 
+          class="
+            justify-content-center
+            text-white-50
+          "
+          style="
+            Font-size:45px
+          "
+        >Search Prescription</b>
+          <div class="form-group">
+            <label for="DrugNameInput" class="text-white-50" style="font-size: 30px">Prescription Name:</label>
+            <input type="text" class="form-control" name="drugname" id="DrugNameInput" placeholder="Enter Prescription Name" style="height:50px" required>
+          </div>
+          <br>
+  
+         <text class="text-white-50" style="font-size: 30px">Is this drug an Opioid?:</text>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="opioidRadios" id="trueopioidRadios" value="TRUE" style="margin-top:13px" required>
+            <label class="form-check-label text-white-50" for="trueopioidRadios" style="font-size: 30px;text-align:center;display:inline-block">
+              Yes
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="opioidRadios" id="falseopioidRadios" value="FALSE" style="margin-top:13px" >
+            <label class="form-check-label text-white-50" for="falseopioidRadios" style="font-size: 30px">
+              No
+            </label>
+          </div>
+          <br> 
+
+          
+          <br>
+            <div style="text-align: center">
+              <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </form>
+  
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </header>
+  
+  <!-- About-->
+  <section class="about-section text-center" id="about">
+      <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+          <div class="col-lg-8">
+          </div>
+        </div>
+      </div>
+    </section>
+
+{% endblock %}

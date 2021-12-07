@@ -1,0 +1,82 @@
+<!-- Shows specific Prescription details from either the search page or the view details button on the view all page -->
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<header class="masthead" style="height:1050px">
+    <div
+      class="
+        container
+        px-4 px-lg-5
+        d-flex
+        h-100
+        align-items-center
+        justify-content-center
+      "
+    >
+      <div class="d-flex justify-content-center">
+        <div class="text-center, text-white-50" style="font-size: 30px; text-align: center">
+
+      {% for prescription in Prescription %}
+        <table>
+          <b 
+          class="
+            justify-content-center
+            text-white-50
+          "
+          style="
+            Font-size:45px
+          "
+        >Search Prescriptions</b><br><br>
+        <tr >
+          <th style="padding-right:60px;text-align:center">Prescription Name</th>
+          <th>Is this an Opioid?</th>
+        </tr>
+      {% empty %}
+      {% endfor %}
+        
+          {% for prescription in Prescription %}
+        <tr> 
+                      
+          <td style="padding-right:60px"> {{ prescription.drugname }}</td>
+       
+           
+          <td > {% if prescription.isopioid == 'TRUE' %}
+                  Yes
+                {% else %}
+                   No 
+                {% endif %}
+          </td>
+        </tr>
+        </table> 
+        <br>
+      <div>
+        <table style="margin-right:auto;margin-left:auto;text-align:auto"> 
+          <tr>
+            <th style="padding-right:60px">Top Ten Prescribers</th>
+            <th>Quantity</th>
+          </tr>  
+          {% for prescriber in topTen %}
+          <tr>
+            <td style="padding-right:60px">
+                {{ prescriber.fname }}
+                {{ prescriber.lname }} 
+            </td>
+            
+            <td style="padding-right:60px">
+              {{ prescriber.qty }}
+            </td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+            <br>
+          {% empty %}
+            <p>No results.<br>Please try again.</p>
+          {% endfor %}
+          <a class="btn btn-primary" href="{% url 'index' %}" style="width:130px;height:65px;font-size:20px" >Back</a>
+        </div>
+      </div>
+    </div>
+  </header>
+{% endblock %}<br>
