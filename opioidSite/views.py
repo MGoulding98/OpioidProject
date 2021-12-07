@@ -201,7 +201,7 @@ def addPrescriberPageView(request) :
 
         prescriber.save()
 
-        return render(request, 'opioidSit/index.html')
+        return render(request, 'opioidSite/index.html')
     else :
         return render(request, 'opioidSite/addPrescriber.html', context)
 
