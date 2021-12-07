@@ -266,7 +266,9 @@ def viewAllPrescriptionsPageView(request):
     return render(request, 'opioidSite/viewAllPrescriptions.html', context)
 
 def viewAllPrescribersPageView (request):
-    prescriber = Prescriber.objects.all()
+    sQuery = "SELECT * FROM pd_prescriber ORDER BY lname, fname"
+    
+    prescriber = Prescriber.objects.raw(sQuery)
 
     paginator = Paginator(prescriber, 10)  # 10 posts in each page
     page = request.GET.get('page')
